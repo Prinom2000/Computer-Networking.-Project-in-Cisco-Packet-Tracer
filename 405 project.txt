@@ -1,0 +1,269 @@
+Campus 1:
+
+interface fa0/0
+ip address 1.0.0.254  255.0.0.0
+no shut
+do wr
+exit
+
+ip dhcp pool campus1
+
+network 1.0.0.0 255.0.0.0
+default-router 1.0.0.254 
+dns-server 1.0.0.100
+exit
+ip dhcp excluded-address 1.0.0.254
+
+
+interface se2/0
+ip address 203.0.0.1 255.255.255.0
+clock rate 64000
+no shut
+do wr
+exit
+
+interface se3/0
+ip address 130.0.0.2 255.255.0.0
+no shut
+do wr
+exit
+
+
+
+
+Campus 2:
+
+interface fa0/0
+ip address 2.0.0.254  255.0.0.0
+no shut
+do wr
+exit
+
+ip dhcp pool campus2
+
+network 2.0.0.0 255.0.0.0
+default-router 2.0.0.254 
+dns-server 1.0.0.100
+exit
+ip dhcp excluded-address 2.0.0.254
+
+
+interface se3/0
+ip address 202.0.0.1 255.255.255.0
+clock rate 64000
+no shut
+do wr
+exit
+
+interface se6/0
+ip address 205.0.0.1 255.255.255.0
+clock rate 64000
+no shut
+do wr
+exit
+
+interface se2/0
+ip address 203.0.0.2 255.255.255.0
+no shut
+do wr
+exit
+
+
+campus 3
+  
+interface fa0/0
+ip address 3.0.0.254  255.0.0.0
+no shut
+do wr
+exit
+
+ip dhcp pool campus3
+
+network 3.0.0.0 255.0.0.0
+default-router 3.0.0.254
+dns-server 1.0.0.100
+exit
+ip dhcp excluded-address 3.0.0.254
+
+
+interface se3/0
+ip address 201.0.0.1 255.255.255.0
+clock rate 64000
+no shut
+do wr
+exit
+
+interface se6/0
+ip address 204.0.0.2 255.255.255.0
+no shut
+do wr
+exit
+
+interface se2/0
+ip address 202.0.0.2 255.255.255.0
+no shut
+do wr
+exit
+
+Campus 4:
+
+interface fa0/0
+ip address 4.0.0.254  255.0.0.0
+no shut
+do wr
+exit
+
+ip dhcp pool campus4
+
+network 4.0.0.0  255.0.0.0
+default-router 4.0.0.254
+dns-server 1.0.0.100
+exit
+ip dhcp excluded-address 4.0.0.254
+
+
+interface se2/0
+ip address 201.0.0.2 255.255.255.0
+no shut
+do wr
+exit
+
+interface se3/0
+ip address 150.0.0.1 255.255.0.0
+clock rate 64000
+no shut
+do wr
+exit
+
+
+Campus 5:
+
+interface fa0/0
+ip address 5.0.0.254  255.0.0.0
+no shut
+do wr
+exit
+
+ip dhcp pool campus5
+
+network 5.0.0.0  255.0.0.0
+default-router 5.0.0.254
+dns-server 1.0.0.100
+exit
+ip dhcp excluded-address 5.0.0.254
+
+
+interface se3/0
+ip address 140.30.0.1 255.255.0.0
+clock rate 64000
+no shut
+do wr
+exit
+
+interface se6/0
+ip address 205.0.0.2 255.255.255.0
+no shut
+do wr
+exit
+
+interface se2/0
+ip address 150.0.0.2 255.255.0.0
+no shut
+do wr
+exit
+
+Campus 6:
+
+interface fa0/0
+ip address 6.0.0.254  255.0.0.0
+no shut
+do wr
+exit
+
+ip dhcp pool campus6
+
+network 6.0.0.0  255.0.0.0
+default-router 6.0.0.254
+dns-server 1.0.0.100
+exit
+ip dhcp excluded-address 6.0.0.254
+
+
+interface se2/0
+ip address 140.10.0.2 255.255.0.0
+no shut
+do wr
+exit
+
+
+interface se3/0
+ip address 130.0.0.1 255.255.0.0
+clock rate 64000
+no shut
+do wr
+exit
+
+interface se6/0
+ip address 204.0.0.1 255.255.255.0
+clock rate 64000
+no shut
+do wr
+exit
+
+
+Routing Table:
+
+Campus 1:
+
+router ospf 1
+network 1.0.0.0 0.255.255.255 area 1
+network 130.0.0.0 0.0.255.255 area 1
+network 203.0.0.0 0.0.0.255 area 1
+exit
+
+
+Campus 2:
+
+router ospf 2
+network 2.0.0.0 0.255.255.255 area 1
+network 202.0.0.0 0.0.0.255 area 1
+network 203.0.0.0 0.0.0.255 area 1
+network 205.0.0.0 0.0.0.255 area 1
+exit
+
+
+
+Campus 3:
+
+router ospf 3
+network 3.0.0.0 0.255.255.255 area 1
+network 201.0.0.0 0.0.0.255 area 1
+network 202.0.0.0 0.0.0.255 area 1
+network 204.0.0.0 0.0.0.255 area 1
+exit
+
+Campus 4:
+
+router ospf 4
+network 4.0.0.0 0.255.255.255 area 1
+network 201.0.0.0 0.0.0.255 area 1
+network 150.0.0.0 0.0.255.255 area 1
+exit
+
+Campus 5:
+
+router ospf 5
+network 5.0.0.0 0.255.255.255 area 1
+network 140.0.0.0 0.0.255.255 area 1
+network 150.0.0.0 0.0.255.255 area 1
+network 205.0.0.0 0.0.0.255 area 1
+exit
+
+Campus 6:
+
+router ospf 6
+network 6.0.0.0 0.255.255.255 area 1
+network 130.0.0.0 0.0.255.255 area 1
+network 140.0.0.0 0.0.255.255 area 1
+network 204.0.0.0 0.0.0.255 area 1
+exit
